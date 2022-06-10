@@ -4,7 +4,7 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 
-const users = [];
+let users = [];
 const port = 3001;
 
 app.get("/", (req, res) => {
