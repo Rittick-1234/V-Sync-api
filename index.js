@@ -32,12 +32,14 @@ io.on("connection", socket => {
     console.log("user joined room");
     console.log(roomId);
     console.log(userName);
-    socket.join(roomId);
-    addUser(userName, roomId);
-    socket.to(roomId).emit("user-connected", userName);
-
-    io.to(roomId).emit("all-users", getRoomUsers(roomId));
-
+    if(roomId && userName){
+      socket.join(roomId);
+      addUser(userName, roomId);
+      socket.to(roomId).emit("user-connected", userName);
+      io.to(roomId).emit("all-users", getRoomUsers(roomId));
+  
+    }
+   
     socket.on("disconnect", () => {
       console.log("disconnected");
       socket.leave(roomId);
